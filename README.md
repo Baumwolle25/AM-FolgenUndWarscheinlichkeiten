@@ -2,4 +2,4 @@
 
 PEO Stimmer
 SEO Schmlaz
-PR  Reiter
+PR  Reiter reiterm@hm.edu
