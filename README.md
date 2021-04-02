@@ -14,3 +14,7 @@
 @Merlin-dot - reiterm@hm.edu
  * Exercise 1.1
  * Exercise 1.2
+
+## Todo
+* Merlin Fibonacci Beispiele Natur/Informatik 
+
