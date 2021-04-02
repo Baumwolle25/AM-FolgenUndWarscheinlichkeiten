@@ -5,6 +5,8 @@
  * created git repository
  * Exercise 1.3
  * Exercise 1.4
+ * Prime numbers in Cryptography
+ * Prime numbers in Nature
 
 ## SEO Schmalz
 
