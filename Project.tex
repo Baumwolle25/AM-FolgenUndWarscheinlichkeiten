@@ -2,7 +2,7 @@
 
     \usepackage[breakable]{tcolorbox}
     \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
-    
+    \usepackage[utf8]{inputenc}
     \usepackage{iftex}
     \ifPDFTeX
     	\usepackage[T1]{fontenc}
@@ -533,16 +533,7 @@ Cryptography}\label{prime-numbers-in-cryptography}}
 Prime numbers are used in cryptographic algorithms, particularly in RSA,
 Source: https://de.wikipedia.org/wiki/RSA-Kryptosystem.
 
-Wir wählen den Exponenten e = 23 . Wir wählen p = 11 und q = 13 für die
-beiden Primzahlen. Die Zahlen p − 1 = 10 und q − 1 = 12 sind teilerfremd
-zum Exponenten e = 23. Der RSA-Modul ist N = p ⋅ q = 143. Damit bilden e
-= 23 und N = 143 den öffentlichen Schlüssel. Die eulersche φ-Funktion
-hat den Wert φ ( N ) = φ ( 143 ) = ( p − 1 ) ( q − 1 ) = 120. Berechnung
-der Inversen zu e \% φ ( N ): Es gilt: e ⋅ d + k ⋅ φ ( N ) = 1 = ggT ⁡ (
-e , φ ( N ) ), im konkreten Beispiel: 23 ⋅ d + k ⋅ 120 = 1 = ggT ⁡ ( 23
-, 120 ). Mit dem erweiterten euklidischen Algorithmus berechnet man nun
-die Faktoren d = 47, und somit ist d = 47 der private Schlüssel, während
-k nicht weiter benötigt wird.
+
 
 Sources: Christian Spannagel 2012, zur Verfügung gestellt von der
 Technischen Informationsbibliothek: https://doi.org/10.5446/19815,
