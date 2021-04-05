@@ -102,10 +102,14 @@ def rsa_keys(unlimited_power):
     N, phi_of_N = q * p, (q-1) * (p-1)
     e = find_that_e(phi_of_N)
     d = gim_e_the_D(e, phi_of_N)
-    return {"N": N, "e": e}, {"q": q, "p": p, "N": N, "phi_of_N": phi_of_N, "e": e, "d": d}
+    public, private = {"N": N, "e": e}, {"q": q, "p": p,
+                                         "N": N, "phi_of_N": phi_of_N, "e": e, "d": d}
+    if d < 1:
+        public, private = rsa_keys(unlimited_power)
+    return public, private
 
 
-public, private = rsa_keys(3)
+public, private = rsa_keys(2)
 
 message = 2
 
