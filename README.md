@@ -14,7 +14,7 @@
  * Exercise 1.4 bug fix
 
 ## PR  Reiter 
-@Merlin-dot - reiterm@hm.edu
+@Merlin-dot - m.reiter@hm.edu
  * Exercise 1.1
  * Exercise 1.2
 
