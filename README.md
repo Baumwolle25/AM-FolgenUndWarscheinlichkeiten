@@ -9,6 +9,9 @@
  * Prime numbers in Nature
 
 ## SEO Schmalz
+@Necrofantasia - valentin.schmalz@hm.edu
+ * Exercise 1.2 optimization and bug fix
+ * Exercise 1.4 bug fix
 
 ## PR  Reiter 
 @Merlin-dot - reiterm@hm.edu
