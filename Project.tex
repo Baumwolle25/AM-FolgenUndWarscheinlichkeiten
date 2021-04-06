@@ -2,7 +2,7 @@
 
     \usepackage[breakable]{tcolorbox}
     \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
-    \usepackage[utf8]{inputenc}
+    
     \usepackage{iftex}
     \ifPDFTeX
     	\usepackage[T1]{fontenc}
@@ -379,20 +379,19 @@
     
 
     
-    \hypertarget{primes}{%
-\section{Primes}\label{primes}}
+    \hypertarget{prime-numbers}{%
+\section{Prime Numbers}\label{prime-numbers}}
 
 Prime numbers are natural numbers greater than 1 that is not a product
 of two natural numbers. A number n is prime if it is greater than 1 and
-no number 2,..n-1 divide n evenly.
+no number 2,3,..n-1 divide n evenly.
 
-Exercise 1.1 calculates all primes smaler that x = 1,000 '\,'\,' all
-primes = a boldface capital P '\,'\,'für latex Every x between 10000 and
-2 is a prime if no y bigger than 2 and smaler than x/2 is able to divide
-x without reminder.
+Exercise 1.1 calculates all primes smaler than x = 1,000. Every x
+between 1,000 and 2 is a prime if no y bigger than 2 and smaler than x/2
+is able to divide x without reminder.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{2}{\boxspacing}
+\prompt{In}{incolor}{10}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Exercise 1.1}
 
@@ -427,49 +426,59 @@ x without reminder.
     \end{Verbatim}
 
     In case the program finds a y bigger than 2 and smaler than x/2 that
-divides x without reminder, we can define x as a composite number.
+divides x without reminder, we can define x as a composite number
+immediatly.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{3}{\boxspacing}
+\prompt{In}{incolor}{7}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Exercise 1.2}
 
-\PY{n}{sol} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+\PY{c+c1}{\PYZsh{}This algorith calculates prime numbers and collects them in a list.}
+\PY{c+c1}{\PYZsh{}It is trimmed for performance, especially when the integers get larger.}
+\PY{n}{integer} \PY{o}{=} \PY{l+m+mi}{2}
+\PY{n}{primes} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
 \PY{n}{circles2} \PY{o}{=} \PY{l+m+mi}{0}
-\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
-    \PY{n}{prime} \PY{o}{=} \PY{k+kc}{True}
-    \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
-        \PY{n}{circles2} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
-        \PY{k}{if} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{n}{j} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
-            \PY{n}{prime} \PY{o}{=} \PY{k+kc}{False}
-            \PY{k}{break}                       \PY{c+c1}{\PYZsh{} not a prime no more runs}
-    \PY{k}{if} \PY{n}{prime}\PY{p}{:}
-        \PY{n}{sol}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
-\PY{n+nb}{print}\PY{p}{(}\PY{n}{sol}\PY{p}{)}
-\PY{n+nb}{print}\PY{p}{(}\PY{n}{circles2}\PY{p}{)}
+\PY{k}{while}\PY{p}{(}\PY{n}{integer} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+    \PY{n}{j} \PY{o}{=} \PY{l+m+mi}{0}
+    \PY{n}{isPrimeNumber} \PY{o}{=} \PY{k+kc}{True}
+    \PY{k}{while}\PY{p}{(}\PY{n}{j} \PY{o}{\PYZlt{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{primes}\PY{p}{)} \PY{o+ow}{and} \PY{n}{isPrimeNumber}\PY{p}{)}\PY{p}{:}
+        \PY{c+c1}{\PYZsh{}We only test if the current integer is divisible by any of the}
+        \PY{c+c1}{\PYZsh{}already collected prime numbers. If it is not divisible we have}
+        \PY{c+c1}{\PYZsh{}found a new prime number.}
+        \PY{n}{circles2} \PY{o}{=} \PY{n}{circles2} \PY{o}{+} \PY{l+m+mi}{1}
+        \PY{k}{if}\PY{p}{(}\PY{n}{integer} \PY{o}{\PYZpc{}} \PY{n}{primes}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+            \PY{n}{isPrimeNumber} \PY{o}{=} \PY{k+kc}{False} \PY{c+c1}{\PYZsh{}Ensures an early exit of the loop}
+        \PY{n}{j} \PY{o}{=} \PY{n}{j} \PY{o}{+} \PY{l+m+mi}{1}
+    
+    \PY{k}{if}\PY{p}{(}\PY{n}{isPrimeNumber}\PY{p}{)}\PY{p}{:}
+        \PY{n}{primes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{integer}\PY{p}{)} \PY{c+c1}{\PYZsh{}Add the new prime number to the list}
+    
+    \PY{n}{integer} \PY{o}{=} \PY{n}{integer} \PY{o}{+} \PY{l+m+mi}{1}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{primes}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-[2, 3, 4, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
-73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157,
-163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241,
-251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347,
-349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439,
-443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541, 547,
-557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641, 643,
-647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751,
-757, 761, 769, 773, 787, 797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859,
-863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977,
-983, 991, 997]
-39875
+[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73,
+79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163,
+167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251,
+257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349,
+353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443,
+449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541, 547, 557,
+563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641, 643, 647,
+653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751, 757,
+761, 769, 773, 787, 797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863,
+877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983,
+991, 997]
     \end{Verbatim}
 
     This reduces the neccessery number of calculations and in turn saves
 time and memory.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{16}{\boxspacing}
+\prompt{In}{incolor}{11}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Optimisation Check}
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Without optimization: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{format}\PY{p}{(}\PY{n}{circles1}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, with simple optimization: }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+} \PY{n+nb}{format}\PY{p}{(}\PY{n}{circles2}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
@@ -481,12 +490,14 @@ time and memory.
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Without optimization: 247,506, with simple optimization: 39,875.
-We saved 207,631 loops.
+Without optimization: 247,506, with simple optimization: 15,620.
+We saved 231,886 loops.
     \end{Verbatim}
 
+    Written as a function, our aproach looks like this.
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{4}{\boxspacing}
+\prompt{In}{incolor}{8}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Exercise 1.4}
 
@@ -495,34 +506,10 @@ We saved 207,631 loops.
 \PY{l+s+sd}{    return: Boolean}
 \PY{l+s+sd}{    True if prime, else False}
 \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
-    \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
-        \PY{k}{if} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{n}{j} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n}{x}\PY{o}{/}\PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+        \PY{k}{if} \PY{n}{x} \PY{o}{\PYZpc{}} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
             \PY{k}{return} \PY{k+kc}{False}
     \PY{k}{return} \PY{k+kc}{True}
-\end{Verbatim}
-\end{tcolorbox}
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{5}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} Validity test}
-
-\PY{n}{valid} \PY{o}{=} \PY{p}{[}\PY{p}{]}
-\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
-    \PY{n}{func} \PY{o}{=} \PY{n}{is\PYZus{}prime}\PY{p}{(}\PY{n}{i}\PY{p}{)}                  \PY{c+c1}{\PYZsh{} should already know the answer}
-    \PY{n}{prime} \PY{o}{=} \PY{k+kc}{True}        
-    \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
-        \PY{k}{if} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{n}{j} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
-            \PY{n}{prime} \PY{o}{=} \PY{k+kc}{False}
-            \PY{k}{if} \PY{o+ow}{not} \PY{n}{func} \PY{o+ow}{and} \PY{o+ow}{not} \PY{n}{prime}\PY{p}{:} \PY{c+c1}{\PYZsh{} did both get the same result?}
-                \PY{n}{valid}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
-            \PY{k}{break}
-    \PY{k}{if} \PY{n}{func} \PY{o+ow}{and} \PY{n}{prime}\PY{p}{:}                 \PY{c+c1}{\PYZsh{} did both get the same result?}
-        \PY{n}{valid}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
-
-\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{valid}\PY{p}{:}
-    \PY{k}{if} \PY{o+ow}{not} \PY{n}{i}\PY{p}{:}
-        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ähem}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -530,15 +517,223 @@ We saved 207,631 loops.
 \subsection{Prime Numbers in
 Cryptography}\label{prime-numbers-in-cryptography}}
 
-Prime numbers are used in cryptographic algorithms, particularly in RSA,
-Source: https://de.wikipedia.org/wiki/RSA-Kryptosystem.
+Prime numbers are used in cryptographic algorithms, particularly in RSA
+(Rivest - Shamir - Adlerman). RSA is asymetric, meaning while how to
+encode messages for the reciever is public kwnoledge, only the reciever
+itself knows how to deciver that message. Contrary to symetric encodings
+like the enigma, where both the sender and the reciever had to posses
+kwnoledge of a designatet de- and encryption process, no prior
+agreements between sender and reciever need be made than a broad
+understanding of the RSA - encryption.
 
+\hypertarget{the-process}{%
+\subsubsection{The Process}\label{the-process}}
 
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Select to prime numbers q and p.
+\item
+  Let N = q x p and φ ( N ) = ( p - 1 ) x ( q - 1 ).
+\item
+  Choose an e with 1 \textless{} e \textless{} φ ( N ) and where the
+  greatest common divisor of e and φ ( N ) = 1.
+\item
+  Calculate a d with the values e and φ ( N ) that satisfies e x d - k x
+  φ ( N ) = 1. There is only one possible solution. The variable k is
+  calculated but not needed.
+\item
+  To encode a number: G = (T\^{}e) \% N
+\item
+  To decode a number: T = (G\^{}d) \% N
+\end{enumerate}
+
+\hypertarget{why-does-it-work}{%
+\subsubsection{Why does it work?}\label{why-does-it-work}}
+
+The private key (d, N) cannot be constructed from the publik key (e, N)
+without considerable effort. To calculate d, φ ( N ) is needed. Finding
+q and p from N takes longer the larger numbers are used. Should someone
+find φ ( N ), the message can be decoded, but since the process is
+asymetric every message can simply be encoded slightly different, making
+long term communication fast, as easy as possible and as secure as
+possible.
+
+\hypertarget{possible-problems}{%
+\subsubsection{Possible problems}\label{possible-problems}}
+
+This algorithm depends on the lack of understanding about prime numbers.
+If that chages, major parts of the internet are not secure anymore.
+Also, the encrytion does not change the pattern of the message, so a
+black-and-white image still shows the same shapes. Techniques like
+Alphabetical Probability are still able to find possible matches faster,
+the bigger the message gets.
 
 Sources: Christian Spannagel 2012, zur Verfügung gestellt von der
 Technischen Informationsbibliothek: https://doi.org/10.5446/19815,
 https://doi.org/10.5446/19816, https://doi.org/10.5446/19817,
 https://doi.org/10.5446/19813, https://doi.org/10.5446/19814,
+https://www.inf.hs-flensburg.de/lang/krypto/algo/euklid.htm
+
+\hypertarget{an-example}{%
+\subsubsection{An Example}\label{an-example}}
+
+Find two primes with x digits.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{18}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{random} \PY{k+kn}{import} \PY{n}{randint} \PY{k}{as} \PY{n}{cryforhelp}
+
+
+\PY{k}{def} \PY{n+nf}{set\PYZus{}of\PYZus{}random\PYZus{}ints}\PY{p}{(}\PY{n}{hero}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{l+s+sd}{    finds two different numbers from 0 to hero (inclusive)}
+\PY{l+s+sd}{    param: int}
+\PY{l+s+sd}{    return: int, int}
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+    \PY{n}{a} \PY{o}{=} \PY{n}{cryforhelp}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{hero}\PY{p}{)}
+    \PY{n}{b} \PY{o}{=} \PY{n}{cryforhelp}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{hero}\PY{p}{)}
+    \PY{k}{if} \PY{n}{a} \PY{o}{==} \PY{n}{b}\PY{p}{:}  \PY{c+c1}{\PYZsh{} to guarantee two unique numbers}
+        \PY{n}{a}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{n}{set\PYZus{}of\PYZus{}random\PYZus{}ints}\PY{p}{(}\PY{n}{hero}\PY{p}{)}
+    \PY{k}{return} \PY{n}{a}\PY{p}{,} \PY{n}{b}
+
+
+\PY{k}{def} \PY{n+nf}{generate\PYZus{}primes}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{l+s+sd}{    finds all primes with x digits and selects two at random}
+\PY{l+s+sd}{    param: int}
+\PY{l+s+sd}{    return: int, int}
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+    \PY{n}{sol} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{pow}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n+nb}{pow}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} pow(10, x) gives a number with x digits}
+        \PY{k}{if} \PY{n}{is\PYZus{}prime}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{:}
+            \PY{n}{sol}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+    \PY{n}{a}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{n}{set\PYZus{}of\PYZus{}random\PYZus{}ints}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sol}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} guarantee two unique numbers}
+    \PY{k}{return} \PY{n}{sol}\PY{p}{[}\PY{n}{a}\PY{p}{]}\PY{p}{,} \PY{n}{sol}\PY{p}{[}\PY{n}{b}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+    Find an e with 1 \textless{} e \textless{} φ ( N ) and where the
+greatest common divisor of e and φ ( N ) = 1.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{17}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} from random import randint as cryforhelp}
+
+\PY{k}{def} \PY{n+nf}{gcd}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{l+s+sd}{    eucledian algorithm}
+\PY{l+s+sd}{    param: int, int}
+\PY{l+s+sd}{    return: int}
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+    \PY{k}{while} \PY{n}{b} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+        \PY{n}{c} \PY{o}{=} \PY{n}{a} \PY{o}{\PYZpc{}} \PY{n}{b}
+        \PY{n}{a} \PY{o}{=} \PY{n}{b}
+        \PY{n}{b} \PY{o}{=} \PY{n}{c}
+    \PY{k}{return} \PY{n}{a}
+
+\PY{k}{def} \PY{n+nf}{find\PYZus{}that\PYZus{}e}\PY{p}{(}\PY{n}{phi\PYZus{}of\PYZus{}N}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{l+s+sd}{    finds an random int with 1 \PYZlt{} int \PYZlt{} phi\PYZus{}of\PYZus{}N and where greatest common divisor of int and phi\PYZus{}of\PYZus{}N = 1}
+\PY{l+s+sd}{    param: int}
+\PY{l+s+sd}{    return: int}
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+    \PY{n}{e} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{phi\PYZus{}of\PYZus{}N}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+        \PY{k}{if} \PY{n}{gcd}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{phi\PYZus{}of\PYZus{}N}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+            \PY{n}{e}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+    \PY{k}{return} \PY{n}{e}\PY{p}{[}\PY{n}{cryforhelp}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{e}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+    Find a d with the values e and φ ( N ) that satisfies e x d - k x φ ( N
+) = 1.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{24}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{extgcd}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{l+s+sd}{    extended eucledian algorithm}
+\PY{l+s+sd}{    solves: gcd(a,b) = s * a + t * b, returns gcd(a,b), s, t}
+\PY{l+s+sd}{    param: int, int}
+\PY{l+s+sd}{    return: int, int, int }
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+    \PY{k}{if} \PY{n}{b} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+        \PY{k}{return} \PY{n}{a}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}
+    \PY{k}{else}\PY{p}{:}
+        \PY{n}{g}\PY{p}{,} \PY{n}{u}\PY{p}{,} \PY{n}{v} \PY{o}{=} \PY{n}{extgcd}\PY{p}{(}\PY{n}{b}\PY{p}{,} \PY{n}{a} \PY{o}{\PYZpc{}} \PY{n}{b}\PY{p}{)}
+        \PY{n}{q} \PY{o}{=} \PY{n}{a}\PY{o}{/}\PY{o}{/}\PY{n}{b}
+        \PY{k}{return} \PY{n}{g}\PY{p}{,} \PY{n}{v}\PY{p}{,} \PY{n}{u}\PY{o}{\PYZhy{}}\PY{n}{q}\PY{o}{*}\PY{n}{v}
+        
+\PY{k}{def} \PY{n+nf}{gim\PYZus{}e\PYZus{}the\PYZus{}D}\PY{p}{(}\PY{n}{e}\PY{p}{,} \PY{n}{phi\PYZus{}of\PYZus{}N}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{l+s+sd}{    solve e * x \PYZhy{} y * phi\PYZus{}of\PYZus{}N = 1 and return x}
+\PY{l+s+sd}{    param: int, int}
+\PY{l+s+sd}{    return: int}
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+    \PY{n}{gcd}\PY{p}{,} \PY{n}{s}\PY{p}{,} \PY{n}{t} \PY{o}{=} \PY{n}{extgcd}\PY{p}{(}\PY{n}{e}\PY{p}{,} \PY{n}{phi\PYZus{}of\PYZus{}N}\PY{p}{)}
+    \PY{k}{return} \PY{n}{s}
+\end{Verbatim}
+\end{tcolorbox}
+
+    Now, generate your keys.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{20}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{rsa\PYZus{}keys}\PY{p}{(}\PY{n}{unlimited\PYZus{}power}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\PY{l+s+sd}{    takes in digits of prime numbers to be used}
+\PY{l+s+sd}{    public key: \PYZob{}N, e\PYZcb{}, private key: \PYZob{}q, p, N, phi\PYZus{}of\PYZus{}N, e, d\PYZcb{}}
+\PY{l+s+sd}{    param: int}
+\PY{l+s+sd}{    return: dict, dict}
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+    \PY{n}{q}\PY{p}{,} \PY{n}{p} \PY{o}{=} \PY{n}{generate\PYZus{}primes}\PY{p}{(}\PY{n}{unlimited\PYZus{}power}\PY{p}{)}
+    \PY{n}{N}\PY{p}{,} \PY{n}{phi\PYZus{}of\PYZus{}N} \PY{o}{=} \PY{n}{q} \PY{o}{*} \PY{n}{p}\PY{p}{,} \PY{p}{(}\PY{n}{q}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{p}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+    \PY{n}{e} \PY{o}{=} \PY{n}{find\PYZus{}that\PYZus{}e}\PY{p}{(}\PY{n}{phi\PYZus{}of\PYZus{}N}\PY{p}{)}
+    \PY{n}{d} \PY{o}{=} \PY{n}{gim\PYZus{}e\PYZus{}the\PYZus{}D}\PY{p}{(}\PY{n}{e}\PY{p}{,} \PY{n}{phi\PYZus{}of\PYZus{}N}\PY{p}{)}
+    \PY{n}{public}\PY{p}{,} \PY{n}{private} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{N}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{N}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{e}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{e}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{q}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{p}\PY{p}{,}
+                                         \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{N}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{N}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{phi\PYZus{}of\PYZus{}N}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{phi\PYZus{}of\PYZus{}N}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{e}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{e}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{d}\PY{p}{\PYZcb{}}
+    \PY{k}{if} \PY{n}{d} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1}\PY{p}{:}
+        \PY{n}{public}\PY{p}{,} \PY{n}{private} \PY{o}{=} \PY{n}{rsa\PYZus{}keys}\PY{p}{(}\PY{n}{unlimited\PYZus{}power}\PY{p}{)}
+    \PY{k}{return} \PY{n}{public}\PY{p}{,} \PY{n}{private}
+\end{Verbatim}
+\end{tcolorbox}
+
+    This is how the RSA - encription works.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{25}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{public}\PY{p}{,} \PY{n}{private} \PY{o}{=} \PY{n}{rsa\PYZus{}keys}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+
+\PY{n}{message} \PY{o}{=} \PY{l+m+mi}{2649} \PY{c+c1}{\PYZsh{} theoretical pin code}
+
+\PY{n}{secret} \PY{o}{=} \PY{n+nb}{pow}\PY{p}{(}\PY{n}{message}\PY{p}{,} \PY{n}{public}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{e}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZpc{}}\PY{k}{public}[\PYZdq{}N\PYZdq{}]
+\PY{n}{message} \PY{o}{=} \PY{n+nb}{pow}\PY{p}{(}\PY{n}{secret}\PY{p}{,} \PY{n}{private}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZpc{}}\PY{k}{private}[\PYZdq{}N\PYZdq{}]
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{secret: }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{secret}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{message: }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{message}\PY{p}{)}\PY{p}{)}
+
+\PY{k}{for} \PY{n}{key}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in} \PY{n}{private}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{n}{key}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{value}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+secret: 727022
+message: 2649
+q  :  907
+p  :  857
+N  :  777299
+phi\_of\_N  :  775536
+e  :  261335
+d  :  208055
+    \end{Verbatim}
 
     \hypertarget{prime-numbers-in-nature}{%
 \subsection{Prime Numbers in Nature}\label{prime-numbers-in-nature}}
@@ -551,9 +746,11 @@ eggs live underground until they crawl to the surface of the earth
 almost on the same day in 17 years. A Chilean-German research team has
 found out why it only crawls out of its underground hiding place after
 17 years. 13 and 17 are prime numbers. Since their enemies and
-competitors usually live in 2, 4 or 6 year rhythms, the cicadas can
-increase their chances of survival by reproducing in the ``low birth''
-cohorts of their predators. During their short aboveground life from
+competitors usually live in 2, 4 or 6 year rhythms, \emph{the}
+\emph{cicadas} \emph{can} \emph{increase} \emph{their} \emph{chances}
+\emph{of} \emph{survival} \emph{by} \emph{reproducing} \emph{in}
+\emph{the} \emph{``low} \emph{birth''} \emph{cohorts} \emph{of}
+\emph{their} \emph{predators.} During their short aboveground life from
 mid-May to June, the cicadas do not cause any damage despite their
 massive occurrence.
 
@@ -564,7 +761,7 @@ https://www.amazon.com/gp/product/B08X3XKRW7/ref=as\_li\_tl?ie=UTF8\&camp=1789\&
 \section{Fibonachi}\label{fibonachi}}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{6}{\boxspacing}
+\prompt{In}{incolor}{13}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Exercise 1.3}
 
@@ -585,7 +782,7 @@ https://www.amazon.com/gp/product/B08X3XKRW7/ref=as\_li\_tl?ie=UTF8\&camp=1789\&
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{7}{\boxspacing}
+\prompt{In}{incolor}{14}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{format}\PY{p}{(}\PY{n}{tiles\PYZus{}area}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
@@ -596,7 +793,7 @@ https://www.amazon.com/gp/product/B08X3XKRW7/ref=as\_li\_tl?ie=UTF8\&camp=1789\&
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{8}{\boxspacing}
+\prompt{In}{incolor}{15}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Area of the Fibonachi spiral}
 
@@ -623,14 +820,13 @@ https://www.amazon.com/gp/product/B08X3XKRW7/ref=as\_li\_tl?ie=UTF8\&camp=1789\&
 214.41369860750336
     \end{Verbatim}
 
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{ }{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{Recherchieren} \PY{n}{Sie} \PY{n}{je} \PY{n}{ein} \PY{n}{Beispiel} \PY{n}{für} \PY{n}{Anwendung} \PY{n}{von} \PY{n}{Primzahlen} \PY{o+ow}{in} \PY{n}{der} \PY{n}{Informatik} \PY{n}{und} \PY{o+ow}{in} \PY{n}{der} \PY{n}{Natur} \PY{n}{und} \PY{n}{stellen} \PY{n}{Sie} \PY{n}{es} \PY{n}{kurz} \PY{n}{ca}\PY{o}{.} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{4} \PY{n}{Seite} \PY{n}{plus} \PY{n}{Diagramme} \PY{n}{oder} \PY{n}{Bilder}\PY{o}{.} \PY{n}{Zitieren} \PY{n}{Sie} \PY{n}{Ihre} \PY{n}{Quellen}\PY{o}{.}
+    Recherchieren Sie je ein Beispiel für Anwendung von Primzahlen in der
+Informatik und in der Natur und stellen Sie es kurz ca. 1/4 Seite plus
+Diagramme oder Bilder. Zitieren Sie Ihre Quellen.
 
-\PY{n}{Recherchieren} \PY{n}{Sie} \PY{n}{je} \PY{n}{ein} \PY{n}{weiteres} \PY{n}{Beispiel} \PY{n}{der} \PY{n}{Fibbonacci} \PY{n}{Fliesen}\PY{o}{/}\PY{n}{Spiralen} \PY{o+ow}{in} \PY{n}{Natur} \PY{n}{und} \PY{n}{Infomatik} \PY{p}{(}\PY{n}{Mathematik}\PY{p}{)} \PY{n}{und} \PY{n}{stellen} \PY{n}{Sie} \PY{n}{es} \PY{n}{kurz} \PY{n}{dar}\PY{o}{.}
-\end{Verbatim}
-\end{tcolorbox}
+Recherchieren Sie je ein weiteres Beispiel der Fibbonacci
+Fliesen/Spiralen in Natur und Infomatik (Mathematik) und stellen Sie es
+kurz dar.
 
 
     % Add a bibliography block to the postdoc
