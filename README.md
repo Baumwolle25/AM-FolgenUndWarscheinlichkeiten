@@ -12,6 +12,8 @@
 @Necrofantasia - valentin.schmalz@hm.edu
  * Exercise 1.2 optimization and bug fix
  * Exercise 1.4 bug fix
+ * Restrucured to follow given standards
+ * Extended prime numbers and Fibonacci sequence
 
 ## PR  Reiter 
 @Merlin-dot - m.reiter@hm.edu
