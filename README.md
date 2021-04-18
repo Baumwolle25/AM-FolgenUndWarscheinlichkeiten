@@ -21,5 +21,5 @@
  * Exercise 1.2
 
 ## Todo
-* Merlin Fibonacci Beispiele Natur/Informatik 
+* Fibonacci square root
 
