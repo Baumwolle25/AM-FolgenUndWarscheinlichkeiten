@@ -19,6 +19,8 @@
 @Merlin-dot - m.reiter@hm.edu
  * Exercise 1.1
  * Exercise 1.2
+ * Fibonacci in physics, nature and mathematics
+
 
 ## Todo
 * Fibonacci square root
